@@ -64,3 +64,27 @@ export default Table;
 
 ```
 ![alt text](image.png)
+
+### Showing Data:
+
+#### headerName VS field:
+- **headerName** is used to define the text displayed in the column header.
+- **field** is used to specify which field from the data source should be displayed in the column.
+
+
+#### valueGetter:
+- The valueGetter function provides flexibility in how data is displayed within a column, allowing you to perform calculations, access nested properties, or apply custom logic as needed.
+- **USECASE**: Let say you want to calculate the half price of each car.
+
+```JSX 
+const [colDefs, setColDefs] = React.useState([
+    { headerName: "MAKE" ,field:"make" },
+    { field: "model" },
+    { field: "price" },
+    { field: "electric" },
+    { headerName:"Half Price",field: "price",valueGetter:(params)=>{return params.data.price/2} },
+  ]);
+
+```
+
+![alt text](image-1.png)
