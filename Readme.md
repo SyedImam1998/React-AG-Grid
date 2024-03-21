@@ -104,6 +104,8 @@ const [columnDefs, setColumnDefs] = useState([
 
 - Helps you add buttons, checkboxes or images to cells with a Cell Component.
 
+- **cellRenderer**
+
 ```JSX
 const CustomButtonComponent = (props) => {
    return <button onClick={() => window.alert('clicked') }>Push Me!</button>;
@@ -154,6 +156,46 @@ const [columnDefs, setColumnDefs] = useState([
  { field: "make", filter: true, floatingFilter: true }, 
 ```
 ![alt text](image-2.png)
+
+#### Types of Filter:
+- agTextColumnFilter
+- agNumberColumnFilter
+- agDateColumnFilter
+
+#### Buttons on Filter:
+- Apply - filter will only apply when apply button as been clicked.
+- Clear - Filter will clear but UI will not clear.
+- Cancel - it will go one step back in active filter ui if not present it will just clear the filter ui filter.
+- Reset - This will clear the ui and also the filter.
+
+
+#### Comparator to filter dates:
+- By Default filtering by dates donot work so we need to convert them into date object.
+
+
+```javascript
+{
+  field:'date',filter:'agDateColumnFilter',
+  filterParam:{
+    comparator:(dateFromFilter,cellValue)=>{
+      if(cellValue==null){return 0;}
+      const dateParts=cellValue.split('/')
+      const day=Number(dateParts[0])
+      const month=Number(dateParts[1])
+      const year=Number(dateParts[2]);
+      const cellDate= new Date(year,month,day);
+
+      if(cellDate<dateFromFilter){
+        return -1;
+      }else if(cellDate>dateFromFilter){
+        return 1;
+      }
+      return 0;
+    }
+  }
+} 
+
+```
 
 #### Editing 
 Enable Editing by setting the editable attribute to true. 
