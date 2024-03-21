@@ -196,7 +196,12 @@ const [columnDefs, setColumnDefs] = useState([
 } 
 
 ```
+####  PopupParent:
+- if your popup filter is getting clipped due to the defined height you can define popupParent on Aggrid.
 
+```html
+<AgGridReact popupParent={document.body}/> 
+```
 #### Editing 
 Enable Editing by setting the editable attribute to true. 
 
