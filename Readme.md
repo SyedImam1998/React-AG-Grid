@@ -186,3 +186,48 @@ const [columnDefs, setColumnDefs] = useState([
 ```
 ![alt text](image-5.png)
 
+#### Sorting 
+- Data is Sorted by clicking the column headers. Sorting is enabled by default.
+- But if you want to have desc by default.
+
+```JSX
+ { field: "price" ,sort: 'desc' }, 
+```
+
+#### Row Selection:
+
+- Checkboxe will be placed for each item of a particular coloumn.
+    - single
+    - multiple
+
+```JSX 
+{ field: "model", checkboxSelection: true },
+
+ <AgGridReact rowData={rowData} columnDefs={colDefs} rowSelection="single" />
+```
+![alt text](image-6.png)
+
+#### Pagination:
+
+- Enable Pagination by setting the value to `true`
+- This will bring that pagination button bottom of the table.
+
+```html
+    <AgGridReact  pagination={true} rowData={rowData} columnDefs={colDefs} rowSelection="single" />
+```
+![alt text](image-7.png)
+
+- **paginationPageSize**- will define how many row should be rendered on the page.
+
+```html
+<AgGridReact pagination={pagination} paginationPageSize={5} rowData={rowData} columnDefs={colDefs} rowSelection="single" />
+```
+
+**paginationPageSizeSelector** - this will define how many items can be defined in the popup. here you need to pass an array as value.
+
+```html
+
+<AgGridReact pagination={pagination} paginationPageSize={5} paginationPageSizeSelector={[5,10,15]} rowData={rowData} columnDefs={colDefs} rowSelection="single" />
+
+```
+![alt text](image-8.png)
