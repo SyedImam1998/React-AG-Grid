@@ -88,3 +88,53 @@ const [colDefs, setColDefs] = React.useState([
 ```
 
 ![alt text](image-1.png)
+
+### Text Formatting
+
+```JSX
+const [columnDefs, setColumnDefs] = useState([
+    { field: "price", valueFormatter: p => '£' + Math.floor(p.value).toLocaleString() },
+]);
+
+<AgGridReact columnDefs={columnDefs} /> 
+
+```
+
+### Cell Components
+
+- Helps you add buttons, checkboxes or images to cells with a Cell Component.
+
+```JSX
+const CustomButtonComponent = (props) => {
+   return <button onClick={() => window.alert('clicked') }>Push Me!</button>;
+ };
+
+const [colDefs, setColDefs] = useState([
+   { field: "button", cellRenderer: CustomButtonComponent },
+   // ...
+ ]); 
+
+```
+
+#### To Pass Data:
+
+```JSX 
+ const pushButtonFun=(data)=>{
+    console.log(data.data);
+  }
+const CustomButtonComponent = (props) => {
+    console.log('props', props)
+    return <button onClick={() => pushButtonFun(props) }>Push Me!</button>;
+  };
+```
+
+### Resizing:
+```JSX
+const [columnDefs, setColumnDefs] = useState([
+    { field: "make", flex: 2 }, //This column will be twice as wide as the others
+    { field: "model", flex: 1 },
+    { field: "price", flex: 1 },
+    { field: "electric", flex: 1 }
+]); 
+
+```
