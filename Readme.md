@@ -196,7 +196,7 @@ const [columnDefs, setColumnDefs] = useState([
 
 #### Row Selection:
 
-- Checkboxe will be placed for each item of a particular coloumn.
+- Checkbox will be placed for each item of a particular coloumn.
     - single
     - multiple
 
@@ -207,13 +207,23 @@ const [columnDefs, setColumnDefs] = useState([
 ```
 ![alt text](image-6.png)
 
+OR 
+
+- If you donot want the checkbox to select just use
+
+```html
+ <AgGridReact rowData={rowData} columnDefs={colDefs} rowSelection="single" />
+
+```
+![alt text](image-9.png)
+
 #### Pagination:
 
 - Enable Pagination by setting the value to `true`
 - This will bring that pagination button bottom of the table.
 
 ```html
-    <AgGridReact  pagination={true} rowData={rowData} columnDefs={colDefs} rowSelection="single" />
+    <AgGridReact  pagination={true} rowData={rowData} columnDefs={colDefs} rowSelection="multiple" />
 ```
 ![alt text](image-7.png)
 
@@ -231,3 +241,69 @@ const [columnDefs, setColumnDefs] = useState([
 
 ```
 ![alt text](image-8.png)
+
+### Themes & Style 
+
+- Manipulate the styles by.
+
+```html
+import "ag-grid-community/styles/ag-theme-quartz.css"; // import Quartz theme
+// import "ag-grid-community/styles/ag-theme-alpine.css"; // import Alpine theme, not used here
+...
+return (
+ <div class="ag-theme-quartz"> // set Quartz Theme on parent div
+   <AgGridReact rowData={...} columnDefs={...} />
+ </div>
+) 
+
+```
+
+```css
+.ag-theme-quartz {
+    /* Changes the color of the grid text */
+      --ag-foreground-color: rgb(14, 68, 145);
+      /* Changes the color of the grid background */
+      --ag-background-color: rgba(241, 247, 255);
+      /* Changes the header color of the top row */
+      --ag-header-background-color: rgba(228, 237, 250);
+      /* Changes the hover color of the row*/
+      --ag-row-hover-color: rgba(0, 38, 255, 0.1);
+} 
+
+```
+
+#### Conditional Cell Styling:
+
+```css
+.rag-green {
+    background-color: #33cc3344;
+  } 
+```
+```jsx
+const [columnDefs, setColumnDefs] = useState([{
+    field: 'electric',
+    cellClassRules: {
+        // apply green to electric cars
+        'rag-green': params => params.value === true,
+    }
+}]);
+
+<AgGridReact columnDefs={columnDefs} /> 
+
+```
+
+#### Conditional Row Styling:
+
+```css
+.rag-red {
+  background-color: #cc222244;
+} 
+```
+```jsx 
+const rowClassRules = {
+    // apply red to Ford cars
+    'rag-red': params => params.data.make === 'Ford',
+};
+
+<AgGridReact rowClassRules={rowClassRules} />
+```
