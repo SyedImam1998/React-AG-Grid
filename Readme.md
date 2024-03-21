@@ -89,7 +89,7 @@ const [colDefs, setColDefs] = React.useState([
 
 ![alt text](image-1.png)
 
-### Text Formatting
+#### Text Formatting
 
 ```JSX
 const [columnDefs, setColumnDefs] = useState([
@@ -100,7 +100,7 @@ const [columnDefs, setColumnDefs] = useState([
 
 ```
 
-### Cell Components
+#### Cell Components
 
 - Helps you add buttons, checkboxes or images to cells with a Cell Component.
 
@@ -128,7 +128,7 @@ const CustomButtonComponent = (props) => {
   };
 ```
 
-### Resizing:
+#### Resizing:
 ```JSX
 const [columnDefs, setColumnDefs] = useState([
     { field: "make", flex: 2 }, //This column will be twice as wide as the others
@@ -138,3 +138,51 @@ const [columnDefs, setColumnDefs] = useState([
 ]); 
 
 ```
+
+### Working With Data:
+
+#### Filter:
+```JSX
+{ field: "make", filter: true },
+```
+![alt text](image-3.png)
+
+
+#### Floating Filter:
+
+```JSX
+ { field: "make", filter: true, floatingFilter: true }, 
+```
+![alt text](image-2.png)
+
+#### Editing 
+Enable Editing by setting the editable attribute to true. 
+
+```JSX 
+const [columnDefs, setColumnDefs] = useState([
+    { field: "make", editable: true },
+]);
+
+<AgGridReact columnDefs={columnDefs} />
+```
+![alt text](image-4.png)
+
+#### Advanced Editing:
+
+```JSX
+const [columnDefs, setColumnDefs] = useState([
+    {
+        field: "make",
+        editable: true,
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: {
+            values: ['Tesla', 'Ford', 'Toyota'],
+        },
+    },
+]);
+
+<AgGridReact columnDefs={columnDefs} />
+
+```
+![alt text](image-5.png)
+
